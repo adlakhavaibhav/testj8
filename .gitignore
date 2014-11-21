@@ -27,4 +27,16 @@ environmentLocator.properties
 rebel.xml
 .swp
 clean.bat
+.name
+compiler.xml
+copyright/
+encodings.xml
+libraries/
+misc.xml
+modules.xml
+scopes/
+uiDesigner.xml
+vcs.xml
+workspace.xml
+
 
