@@ -1,5 +1,7 @@
 package com.nm.rest.resource;
 
+import com.nm.rest.response.test.TestPojoResponse;
+import com.nm.service.TestPojo;
 import com.nm.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,8 +35,9 @@ public class TestResource {
 
     @GET
     @Path("/two")
+
     @Produces("application/json")
-    public Response two() {
+    public TestPojoResponse two() {
 
         List<String> myList =
                 Arrays.asList("a1", "a2", "b1", "c2", "c1");
@@ -46,6 +49,9 @@ public class TestResource {
                 .sorted()
                 .forEach(System.out::println);
 
-        return Response.ok(testService.testPojo()).build();
+        TestPojoResponse testPojoResponse = new TestPojoResponse();
+        testPojoResponse.setTestPojo(new TestPojo("1","hello pojo"));
+
+        return testPojoResponse;
     }
 }

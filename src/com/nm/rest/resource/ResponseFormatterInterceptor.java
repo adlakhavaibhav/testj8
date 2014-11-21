@@ -1,8 +1,12 @@
 package com.nm.rest.resource;
 
+import com.nm.rest.constants.RespConstants;
+import com.nm.rest.response.builder.JSONResponseBuilder;
 import org.jboss.resteasy.annotations.interception.ServerInterceptor;
 import org.jboss.resteasy.core.ServerResponse;
 import org.jboss.resteasy.spi.interception.PostProcessInterceptor;
+import  com.nm.rest.response.generic.GenericErrorResponse;
+import  com.nm.rest.response.generic.AbstractBaseResponse;
 
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.Provider;
@@ -10,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *
  * Created by adlakhavaibhav on 20/11/14.
  */
 @Provider
@@ -22,13 +27,17 @@ public class ResponseFormatterInterceptor implements PostProcessInterceptor {
 
     @Override
     public void postProcess(ServerResponse serverResponse) {
-//    Long startTime = System.currentTimeMillis();
+
+
+        Long startTime = System.currentTimeMillis();
         Object responseEntity = serverResponse.getEntity();
         setContentTypeHeader(serverResponse);
         String response;
 
-       /* if (responseEntity == null) {
+        if (responseEntity == null) {
             GenericErrorResponse nullErrorResponse = new GenericErrorResponse();
+
+
             nullErrorResponse.setException(true);
             nullErrorResponse.addMessage("You must be out of your mind. Response from API cannot be null...Go fix this ");
             response = new JSONResponseBuilder().addField(RespConstants.RESULTS, nullErrorResponse).buildAsString();
@@ -41,10 +50,10 @@ public class ResponseFormatterInterceptor implements PostProcessInterceptor {
             response = new JSONResponseBuilder().addField(RespConstants.RESULTS, genericErrorResponse).buildAsString();
         } else {
             response = new JSONResponseBuilder().addField(RespConstants.RESULTS, responseEntity).buildAsString();
-        }*/
-        //serverResponse.setEntity(response);
-    /*Long endTime = System.currentTimeMillis();
-    System.out.println("in formatter edge" + (endTime - startTime) + " ms" + " -> " + responseEntity.getClass());*/
+        }
+        serverResponse.setEntity(response);
+        Long endTime = System.currentTimeMillis();
+        System.out.println("in formatter edge" + (endTime - startTime) + " ms" + " -> " + responseEntity.getClass());
     }
 
     private void setContentTypeHeader(ServerResponse serverResponse) {
