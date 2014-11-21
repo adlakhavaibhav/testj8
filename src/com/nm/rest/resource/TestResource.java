@@ -52,6 +52,7 @@ public class TestResource {
         TestPojoResponse testPojoResponse = new TestPojoResponse();
         testPojoResponse.setTestPojo(new TestPojo("1","hello pojo"));
 
+        testService.testPojo();
         return testPojoResponse;
     }
 }
