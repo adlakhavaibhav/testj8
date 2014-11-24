@@ -74,6 +74,12 @@
             </fileset>
         </copy>
 
+        <copy todir="${project.dist.dir}/WEB-INF/lib">
+            <fileset dir="${lib.jedis.dir}">
+                <include name="*.jar"/>
+            </fileset>
+        </copy>
+
 
     </target>
 
